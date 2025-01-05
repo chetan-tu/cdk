@@ -25,3 +25,19 @@ class EuropaceStack(Stack):
                 )
             ]
         )
+
+        # defining Security Group for Private Web Service
+        private_web_service_sg = ec2.SecurityGroup(
+            self, "PrivateWebServiceSecurityGroup",
+            vpc=private_web_service_vpc,
+            description="Allow internal access only for Private Web Service",
+            allow_all_outbound=True
+        )
+
+        # adding Inbound Rule to Allow Internal VPC Traffic
+        private_web_service_sg.add_ingress_rule(
+            # Allow traffic from within the VPC CIDR range
+            peer=ec2.Peer.ipv4("10.0.0.0/16"),
+            connection=ec2.Port.tcp(80),       # Allow HTTP traffic on port 80
+            description="Allow HTTP traffic from within the VPC"
+        )
