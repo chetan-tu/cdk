@@ -1,7 +1,18 @@
+# AWS CDK Private Web Service
 
-# Welcome to CDK Python project!
+This project deploys a private web service hosted on an EC2 instance using AWS CDK. The web server runs in an isolated subnet within a VPC and is accessible only within the same VPC. It also includes AWS Systems Manager (SSM) integration for secure management of the EC2 instance.
 
-This is a project for CDK development with Python.
+---
+
+## Features
+
+- **VPC**: A private VPC with isolated subnets across 2 Availability Zones.
+- **EC2 Instance**: The web service is hosted on an EC2 instance in an isolated subnet.
+- **Security Group**: Configured to allow HTTP traffic (port 80) only from within the VPC.
+- **IAM Role**: Grants SSM permissions to the EC2 instance for secure management.
+- **SSM VPC Endpoints**: Enables the use of AWS Systems Manager in the isolated environment without internet access.
+
+---
 
 ## Availability and Redundancy !!!
 - The VPC spans **2 Availability Zones (AZs)**, creating subnets in each AZ.
@@ -9,14 +20,41 @@ This is a project for CDK development with Python.
   - Deploying additional instances in the other AZ.
   - Introducing an **Auto Scaling Group** and a **Load Balancer** for redundancy and fault tolerance.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+---
 
-This project is set up like a standard Python project.  The initialization
-process also creates a virtualenv within this project, stored under the `.venv`
-directory.  To create the virtualenv it assumes that there is a `python3`
-(or `python` for Windows) executable in your path with access to the `venv`
-package. If for any reason the automatic creation of the virtualenv fails,
-you can create the virtualenv manually.
+## Prerequisites
+
+Before you can deploy this project, ensure the following are installed and set up:
+
+1. **AWS CLI**:
+   - Install and configure it with your AWS credentials.
+   - Run:
+     ```bash
+     aws configure
+     ```
+
+2. **AWS CDK**:
+   - Install AWS CDK globally:
+     ```bash
+     npm install -g aws-cdk
+     ```
+
+3. **Python**:
+   - Ensure Python 3.7 or later is installed.
+
+  
+4. **Node.js**:
+   - Required for the AWS CDK CLI. Install Node.js from [here](https://nodejs.org/).
+
+---
+
+## How to Run This Code
+
+Follow these steps to clone the repository and deploy the stack:
+
+### 1. Clone the Repository
+
+### 2.Create a Virtual enivronment
 
 To manually create a virtualenv on MacOS and Linux:
 
