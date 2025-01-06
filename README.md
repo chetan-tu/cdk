@@ -3,6 +3,12 @@
 
 This is a project for CDK development with Python.
 
+## Availability and Redundancy !!!
+- The VPC spans **2 Availability Zones (AZs)**, creating subnets in each AZ.
+- While the current setup deploys a **single EC2 instance**, the availability can be improved by:
+  - Deploying additional instances in the other AZ.
+  - Introducing an **Auto Scaling Group** and a **Load Balancer** for redundancy and fault tolerance.
+
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
 This project is set up like a standard Python project.  The initialization
