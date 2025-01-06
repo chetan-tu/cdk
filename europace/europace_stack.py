@@ -61,3 +61,17 @@ class EuropaceStack(Stack):
             role=private_web_service_role,
             security_group=private_web_service_sg
         )
+
+        # Adding VPC Endpoints for SSM for Private Web Service
+        private_web_service_vpc.add_interface_endpoint(
+            "SSMEndpoint",
+            service=ec2.InterfaceVpcEndpointAwsService.SSM
+        )
+        private_web_service_vpc.add_interface_endpoint(
+            "SSMMessagesEndpoint",
+            service=ec2.InterfaceVpcEndpointAwsService.SSM_MESSAGES
+        )
+        private_web_service_vpc.add_interface_endpoint(
+            "EC2MessagesEndpoint",
+            service=ec2.InterfaceVpcEndpointAwsService.EC2_MESSAGES
+        )
