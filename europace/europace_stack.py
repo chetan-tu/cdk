@@ -51,3 +51,13 @@ class EuropaceStack(Stack):
             iam.ManagedPolicy.from_aws_managed_policy_name(
                 "AmazonSSMManagedInstanceCore")
         )
+
+        # defining the private EC2 instance
+        private_web_service_instance = ec2.Instance(
+            self, "PrivateWebServiceInstance",
+            instance_type=ec2.InstanceType("t3.micro"),
+            machine_image=ec2.MachineImage.latest_amazon_linux(),
+            vpc=private_web_service_vpc,
+            role=private_web_service_role,
+            security_group=private_web_service_sg
+        )
