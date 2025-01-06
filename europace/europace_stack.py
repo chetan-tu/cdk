@@ -41,3 +41,13 @@ class EuropaceStack(Stack):
             connection=ec2.Port.tcp(80),       # Allow HTTP traffic on port 80
             description="Allow HTTP traffic from within the VPC"
         )
+
+        # defining IAM role for EC2 instance
+        private_web_service_role = iam.Role(
+            self, "PrivateWebServiceEC2Role",
+            assumed_by=iam.ServicePrincipal("ec2.amazonaws.com")
+        )
+        private_web_service_role.add_managed_policy(
+            iam.ManagedPolicy.from_aws_managed_policy_name(
+                "AmazonSSMManagedInstanceCore")
+        )
